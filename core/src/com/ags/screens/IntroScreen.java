@@ -7,6 +7,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Sprite;
+import com.badlogic.gdx.utils.TimeUtils;
 
 /**
  * Created by AkidSe on 23.07.2017.
@@ -18,6 +19,8 @@ public class IntroScreen implements Screen {
     Texture logoTexture;
     Sprite logoSprite;
     OrthographicCamera camera;
+
+    long startTime;
 
     public IntroScreen(final GadzillaGame pGame)
     {
@@ -32,6 +35,7 @@ public class IntroScreen implements Screen {
         camera = new OrthographicCamera();
         camera.setToOrtho(false, 960, 540);
 
+        startTime = TimeUtils.millis();
     }
 
     @Override
@@ -45,7 +49,7 @@ public class IntroScreen implements Screen {
         game.batch.begin();
         logoSprite.draw(game.batch);
         game.batch.end();
-        if (Gdx.input.isTouched()) {
+        if (TimeUtils.millis() - startTime > 5000) {
             game.setScreen(new MenuScreen(game));
             dispose();
         }
