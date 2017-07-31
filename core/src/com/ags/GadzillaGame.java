@@ -1,6 +1,7 @@
 package com.ags;
 
 import com.ags.screens.IntroScreen;
+import com.ags.screens.MenuScreen;
 import com.badlogic.gdx.ApplicationAdapter;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.Gdx;
@@ -14,7 +15,7 @@ public class GadzillaGame extends Game {
 	@Override
 	public void create () {
 		batch = new SpriteBatch();
-		this.setScreen(new IntroScreen(this));
+		this.setScreen(new MenuScreen(this));
 	}
 
 	@Override
