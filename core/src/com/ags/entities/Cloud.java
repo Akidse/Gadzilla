@@ -23,20 +23,22 @@ public class Cloud {
         cloudTexture = pCloudTexture;
         cloudSprite = new Sprite(cloudTexture);
         cloudSprite.setScale(1f);
-        refreshSprite();
+        refreshSprite(true);
     }
 
-    public void refreshSprite()
+    public void refreshSprite(boolean randomWidth)
     {
-        cloudSprite.setPosition(-cloudSprite.getWidth(), (Gdx.graphics.getHeight() - Gdx.graphics.getHeight()*((random.nextInt(9))/10.f)));
-        cloudSpeed = (3+(float)random.nextInt(4))/10.f;
+        int rand = random.nextInt(9)+1;
+        cloudSprite.setPosition(-cloudSprite.getWidth(), Gdx.graphics.getHeight() - Gdx.graphics.getHeight()*(rand/10.f));
+        if(randomWidth)cloudSprite.setX(Gdx.graphics.getWidth()- Gdx.graphics.getWidth()*(rand/10.f));
+        cloudSpeed = (4+random.nextInt(8))/10.f;
     }
     public void render(float delta, SpriteBatch batch)
     {
         cloudSprite.translateX(cloudSpeed);
         if(cloudSprite.getX() >= Gdx.graphics.getWidth())
         {
-            refreshSprite();
+            refreshSprite(false);
         }
         cloudSprite.draw(batch);
     }
